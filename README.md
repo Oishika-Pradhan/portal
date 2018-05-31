@@ -14,53 +14,18 @@ If you are an Outreachy Applicant, start with reading [this](https://github.com/
 Setup for developers (Unix)
 ---------------------------
 
-1. Make sure you have installed Python 3.6, [pip3](https://pip.pypa.io/en/latest/) and [virtualenv](http://www.virtualenv.org/en/latest/).
-1. If working behind a proxy, make sure your environment variables are properly set up. If
-   you still get an error due to proxy, use "-E" flag along with "sudo" to export all the
-   environment variables.
-1. Make sure you have python3-dev installed on your operating system. For Debian, you would additionally require libpq-dev.
-   Install by using `sudo apt-get install libpq-dev python3-dev`
-1. Make sure you have PostgreSQL installed. For a tutorial on installing
-   Postgres, [Django Girls'](http://djangogirls.org) ebook,
-   [Tutorials Extension](http://djangogirls.org/resources/), is a reference.
-   The info is also on [Django Girls GitHub repository](https://github.com/DjangoGirls/tutorial-extensions/blob/master/en/optional_postgresql_installation/README.md).
-1. Clone the repo - `git clone git@github.com:systers/portal.git` and cd into
-  the `portal` directory. If working behind a proxy, follow the instructions [here](https://cms-sw.github.io/tutorial-proxy.html).
-1. Create a virtual environment with Python 3 and install dependencies:
+### OSX
 
-     ```bash
-     $ virtualenv venv --python=/path/to/python3
-     $ source venv/bin/activate
-     $ pip install -r requirements/dev.txt
-     ```
-1. Create `systersdb` database, where `systersdb` might be any suitable name.
+1. Make sure you have Command Line Tools installed. If you need to install Command Line Tools, please run this command on your terminal.
+
+    ```sh
+    xcode-select --install
     ```
-    $ sudo -i -u postgres
-    $ createuser <any name e.g. alice> --pwprompt
-    $ psql
-    $ CREATE DATABASE systersdb;
-    $ \c systersdb;
-    $ GRANT ALL PRIVILEGES ON DATABASE systersdb to <the name>;
-    ```
-1. Fill in the database details in `systers_portal/settings/dev.py`.
-1. Run `export SECRET_KEY=foobarbaz` in your terminal, ideally the secret key
-  should be 40 characters long, unique and unpredictable. Optionally to set the
-  shell variable every time you activate the virtualenv, edit `venv/bin/activate`
-  and add to the bottom the export statement.
-1. Run `python systers_portal/manage.py migrate`.
-1. Run `python systers_portal/manage.py cities_light` for downloading and importing data for django-cities-light.
-1. Run `python systers_portal/manage.py createsuperuser` to create a superuser for the admin panel.
-  Fill in the details asked.
-1. Run `python systers_portal/manage.py runserver` to start the development server. When in testing
-  or production, feed the respective settings file from the command line, e.g. for
-  testing `python systers_portal/manage.py runserver --settings=systers_portal.settings.testing`.
-1. Before commiting run `flake8 systers_portal` and fix PEP8 warnings.
-1. Run `python systers_portal/manage.py test --settings=systers_portal.settings.testing`
-  to run all the tests.
+2. Run this [script](scripts/setup_env_osx.sh) to setup the development environment in OSX.
 
+### Debian (Ubuntu)
 
-If you face some issues while installing and making Portal up in your local, have a look at issues labelled as [While Setting up Portal](https://github.com/systers/portal/labels/While%20Setting%20up%20Portal).
-
+1. Run this [script](scripts/setup_env_linux_debian.sh) *with sudo access* to setup the development environment in Ubuntu.
 
 Setup for developers (Windows)
 ------------------------------
