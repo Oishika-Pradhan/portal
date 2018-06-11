@@ -21,11 +21,25 @@ Setup for developers (Unix)
     ```sh
     xcode-select --install
     ```
-2. Run this [script](scripts/setup_env_osx.sh) to setup the development environment in OSX.
+2. Run this [script](scripts/devenv-osx) to setup the development environment in OSX.
+    
+    ```sh
+    ./devenv-osx setup
+    ./devenv-osx run
+    ```
+
+  Just the argument `run` can be used later to host the application on local network.
 
 ### Debian (Ubuntu)
 
-1. Run this [script](scripts/setup_env_linux_debian.sh) to setup the development environment in Ubuntu.
+1. Run this [script](scripts/devenv-debian) to setup the development environment in Ubuntu.
+
+    ```sh
+    ./devenv-debian setup
+    ./devenv-debian run
+    ```
+
+  Just the argument `run` can be used later to host the application on local network.
 
 Setup for developers (Windows)
 ------------------------------
