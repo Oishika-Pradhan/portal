@@ -9,7 +9,6 @@ export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 brew install git
 brew install pyenv
 brew install pyenv-virtualenv
-
 export PYENV_ROOT=/usr/local/var/pyenv
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
@@ -35,10 +34,10 @@ while true; do
     echo "Please try again"
 done
 read -p "Enter the name of the db: " db
-psql postgres -c "CREATE ROLE $username WITH PASSWORD '$password'"
+psql postgres -c "CREATE USER $username WITH PASSWORD '$password'"
 psql postgres -c "CREATE DATABASE $db"
 psql postgres -c "\c $db"
-psql postgres -c "GRANT ALL PRIVILEGES ON DATABASE $db to $username"
+psql postgres -c "GRANT ALL PRIVILEGES ON DATABASE $db TO $username"
 
 # change the django settings
 sed -i.bak "s/'NAME': 'systersdb',/'NAME': '$db',/" ../systers_portal/systers_portal/settings/dev.py

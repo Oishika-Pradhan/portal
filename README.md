@@ -25,7 +25,7 @@ Setup for developers (Unix)
 
 ### Debian (Ubuntu)
 
-1. Run this [script](scripts/setup_env_linux_debian.sh) *with sudo access* to setup the development environment in Ubuntu.
+1. Run this [script](scripts/setup_env_linux_debian.sh) to setup the development environment in Ubuntu.
 
 Setup for developers (Windows)
 ------------------------------

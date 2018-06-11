@@ -1,16 +1,17 @@
 #!/bin/bash
 # setup dev env on debian
 
-# check if sudo permission is not available
-if [ "$EUID" -ne 0 ]; then
-    echo "sudo permission is not available"
-    exit
-fi
-
 # install system-wide dependencies 
-apt-get install git curl python-pip
+sudo apt-get install -y git curl python-pip make build-essential libssl-dev zlib1g-dev libbz2-dev \
+libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
+xz-utils tk-dev
+
+# install and initialize pyenv
 curl -L https://github.com/pyenv/pyenv-installer/raw/master/bin/pyenv-installer | bash
 git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
 # setting up virtualenv and installing requirements
@@ -30,10 +31,10 @@ while true; do
     echo "Please try again"
 done
 read -p "Enter the name of the db: " db
-sudo -i -u postgres psql -c "CREATE ROLE $username WITH PASSWORD '$password'"
+sudo -i -u postgres psql -c "CREATE USER $username WITH PASSWORD '$password'"
 sudo -i -u postgres psql -c "CREATE DATABASE $db"
 sudo -i -u postgres psql -c "\c $db"
-sudo -i -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE $db to $username"
+sudo -i -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE $db TO $username"
 
 # change the django settings
 sed -i.bak "s/'NAME': 'systersdb',/'NAME': '$db',/" ../systers_portal/systers_portal/settings/dev.py
